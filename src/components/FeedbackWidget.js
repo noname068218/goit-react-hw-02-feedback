@@ -1,10 +1,18 @@
 import React, { Component } from 'react';
-import { StyledButton } from './Feedback.style';
+import {
+  StyledButton,
+  FeedbackWraper,
+  SectionStyle,
+  BtnWraper,
+  TextP,
+} from './Feedback.style';
 
 const Section = ({ title, children }) => (
   <div>
-    <h2>{title}</h2>
-    {children}
+    <SectionStyle>
+      <h2>{title}</h2>
+      {children}
+    </SectionStyle>
   </div>
 );
 
@@ -15,11 +23,13 @@ const Statistics = ({ good, neutral, bad }) => {
 
   return (
     <div>
-      <p>good = {good}</p>
-      <p>neutral = {neutral}</p>
-      <p>bad = {bad}</p>
-      <p>Total = {countTotalFeedback}</p>
-      <p>Good: {Math.round(countPositiveFeedbackPercentage)}%</p>
+      <TextP>
+        <p>good = {good}</p>
+        <p>neutral = {neutral}</p>
+        <p>bad = {bad}</p>
+        <p>Total = {countTotalFeedback}</p>
+        <p>Good: {Math.round(countPositiveFeedbackPercentage)}%</p>
+      </TextP>
     </div>
   );
 };
@@ -32,9 +42,11 @@ const Button = ({ value, onUpdate }) => (
 
 const FeedbackOptions = ({ good, neutral, bad, onLeaveFeedback }) => (
   <div>
-    <Button value={good} onUpdate={onLeaveFeedback('good')} />
-    <Button value={neutral} onUpdate={onLeaveFeedback('neutral')} />
-    <Button value={bad} onUpdate={onLeaveFeedback('bad')} />
+    <BtnWraper>
+      <Button value={good} onUpdate={onLeaveFeedback('good')}></Button>
+      <Button value={neutral} onUpdate={onLeaveFeedback('neutral')} />
+      <Button value={bad} onUpdate={onLeaveFeedback('bad')} />
+    </BtnWraper>
   </div>
 );
 
@@ -74,23 +86,25 @@ export class App extends Component {
 
     return (
       <div>
-        <Section title="Please leave feedback">
-          <FeedbackOptions
-            good={good}
-            neutral={neutral}
-            bad={bad}
-            onLeaveFeedback={this.updateFeedback}
-          />
-        </Section>
-        {good + neutral + bad > 0 ? (
-          <Section title="Statistics">
-            <Statistics good={good} neutral={neutral} bad={bad} />
+        <FeedbackWraper>
+          <Section title="Please leave feedback">
+            <FeedbackOptions
+              good={good}
+              neutral={neutral}
+              bad={bad}
+              onLeaveFeedback={this.updateFeedback}
+            />
           </Section>
-        ) : (
-          <Section title="Statistics">
-            <Notification message="There is no feedback" />
-          </Section>
-        )}
+          {good + neutral + bad > 0 ? (
+            <Section title="Statistics">
+              <Statistics good={good} neutral={neutral} bad={bad} />
+            </Section>
+          ) : (
+            <Section title="Statistics">
+              <Notification message="There is no feedback" />
+            </Section>
+          )}
+        </FeedbackWraper>
       </div>
     );
   }

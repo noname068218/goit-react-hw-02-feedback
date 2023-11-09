@@ -46,3 +46,36 @@ export const StyledButton = styled.button`
     opacity: 0;
   }
 `;
+
+export const FeedbackWraper = styled.div`
+  width: 500px;
+  height: auto;
+  background-image: linear-gradient(163deg, #00ff75 0%, #3700ff 100%);
+  border-radius: 20px;
+  transition: all 0.3s;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0 auto;
+
+  &:hover {
+    box-shadow: 0px 0px 30px 1px rgba(0, 255, 117, 0.3);
+  }
+`;
+
+export const SectionStyle = styled.section`
+  font-size: large;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`;
+export const BtnWraper = styled.div`
+  display: flex;
+  gap: 10px;
+`;
+
+export const TextP = styled.p`
+  font-weight: bold;
+`;
